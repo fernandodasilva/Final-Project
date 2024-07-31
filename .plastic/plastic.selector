@@ -1,0 +1,4 @@
+repository "SilentLibrary_Mobile@SilentLibrary@cloud"
+  path "/"
+    br "/main"
+    co "/main"
