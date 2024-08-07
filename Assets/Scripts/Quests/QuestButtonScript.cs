@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class QuestButtonScript : MonoBehaviour
 {
 
-    public int questID;
     public Text questTitle;
 
     private GameObject acceptButton;
@@ -24,19 +23,15 @@ public class QuestButtonScript : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        QuestManager.instance.currentQuest.id = questID;
-
-    }
-
     public void AcceptQuest()
     {
  
         HUDManager.instance.questPanel.SetActive(false);
         GameManager.Instance.EnableMovement();
         HUDManager.instance.HideMouseCursor();
-        QuestManager.instance.StartQuest(questID);
+
+        QuestManager.instance.StartQuest(questToAccept.id);
+        GameManager.Instance.CurrentQuest = questToAccept;
 
 
     }

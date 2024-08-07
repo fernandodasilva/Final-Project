@@ -46,15 +46,12 @@ public class QuestObject : InteractableObject
 
     public override void Interact()
     {
-        if (!startedDialog)
-        {
+
             StartDialog();
-           HUDManager.instance.acceptButton.GetComponent<QuestButtonScript>().questID = this.objectQuest.id;
-           Debug.Log(HUDManager.instance.acceptButton.GetComponent<QuestButtonScript>().questID + " , " + this.objectQuest.id);
+            HUDManager.instance.acceptButton.GetComponent<QuestButtonScript>().questToAccept = objectQuest;
 
-        }
 
-        else if (HUDManager.instance.questDescriptionText.text == sentences[index])
+         if (HUDManager.instance.questDescriptionText.text == sentences[index])
         {
             NextLine();
         }
@@ -72,6 +69,7 @@ public class QuestObject : InteractableObject
             HUDManager.instance.acceptButton.SetActive(true);
             HUDManager.instance.rejectButton.SetActive(true);
             QuestManager.instance.currentQuest = objectQuest;
+            return;
 
         }
 
@@ -79,20 +77,20 @@ public class QuestObject : InteractableObject
         {
             HUDManager.instance.acceptButton.SetActive(false);
             HUDManager.instance.rejectButton.SetActive(false);
+
         }
+
+
         if (objectQuest.progress == Quest.QuestStatus.STARTED)
         {
             ResetInteraction();
             HUDManager.instance.questDescriptionText.text = string.Empty;
+            sentences.Clear();
             sentences.Add(HUDManager.instance.startedQuestMessage);
 
             GameManager.Instance.EnableMovement();
             HUDManager.instance.HideMouseCursor();
-            QuestManager.instance.currentQuest.id = objectQuest.id;
-            QuestManager.instance.currentQuest.description = objectQuest.description;
-            QuestManager.instance.currentQuest.progress = objectQuest.progress;
-            QuestManager.instance.currentQuest.isFinished = objectQuest.isFinished;
-            QuestManager.instance.currentQuest.isActive = objectQuest.isActive;
+            return;
 
         }
         if (objectQuest.progress == Quest.QuestStatus.NOT_AVAILABLE)
@@ -103,6 +101,7 @@ public class QuestObject : InteractableObject
 
             GameManager.Instance.EnableMovement();
             HUDManager.instance.HideMouseCursor();
+            return;
 
         }
         if (objectQuest.progress == Quest.QuestStatus.FINISHED)
@@ -113,14 +112,13 @@ public class QuestObject : InteractableObject
 
             GameManager.Instance.EnableMovement();
             HUDManager.instance.HideMouseCursor();
-
+            return;
         }
     }
 
     public override void ResetInteraction()
     {
         index = 0;
-        sentences.Clear();
     }
 
 
@@ -154,10 +152,8 @@ public class QuestObject : InteractableObject
     private void StartDialog()
     {
         startedDialog = true;
-        HUDManager.instance.questTitleText.text = objectQuest.title;
-        HUDManager.instance.questDescriptionText.text = objectQuest.description;
 
-        HUDManager.instance.questPanel.SetActive(true);
+        OpenQuestWindow();
         index = 0;
             sentences.Add(objectQuest.description);
 
@@ -175,6 +171,21 @@ public class QuestObject : InteractableObject
             HUDManager.instance.questDescriptionText.text += ch;
             yield return new WaitForSeconds(typingTime);
         }
+    }
+
+    public void OpenQuestWindow()
+    {
+        HUDManager.instance.questPanel.SetActive(true);
+        HUDManager.instance.questTitleText.text = objectQuest.title;
+        HUDManager.instance.questDescriptionText.text = objectQuest.description;
+
+    }
+
+
+    public void AcceptQuest()
+    {
+        objectQuest.StartQuest();
+        GameManager.Instance.CurrentQuest = objectQuest;
     }
 
 }

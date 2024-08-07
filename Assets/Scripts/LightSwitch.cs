@@ -34,12 +34,12 @@ public class LightSwitch : InteractableObject
     {
         if (!isActive)
         {
+            GameManager.Instance.ActivatePower();
+            questGoal.CompleteGoal();
             foreach (var light in lights)
             {
-                GameManager.Instance.ActivatePower();
                 light.SetActive(true);
                 isActive = true;
-                questGoal.CompleteGoal();
             }
         }
         else

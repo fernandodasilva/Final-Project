@@ -39,6 +39,13 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (currentQuest != null)
+        { 
+        currentQuest.CheckGoals();
+        }
+    }
 
 
 
@@ -53,11 +60,18 @@ public class QuestManager : MonoBehaviour
 
     }
 
-
+    public void BeginQuest(Quest questToStart)
+    {
+        currentQuest = questToStart;
+        currentQuest.progress = QuestStatus.STARTED;
+        currentQuest.isActive = true;
+        Debug.Log("Quest " + currentQuest.id + ", named " + currentQuest.title + " " + currentQuest.progress);
+    }
 
     public void RejectQuest()
     {
         GameManager.Instance.EndInteraction();
+        currentQuest = null;
     }
 
 }

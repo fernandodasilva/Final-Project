@@ -3,77 +3,71 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-[System.Serializable]
+[System.Serializable] //ok é serializable mesmo
 public class Quest 
 {
-    public int id;      //ID da missão em si
-    public string title; //nome da missão, se for necessário
-    public string description; //descrição da missão, vinda de quem dar a missão
+    public int id;      //ID da missão em si - SERÁ NECESSÁRIO para pegar os dados da missão pelo ID
+    public string title; //nome da missão
+    public string description; //descrição da missão
+    public int nextQuestID;
 
     public List<GameObject> questGoals;
 
-    public enum QuestStatus { NOT_AVAILABLE, AVAILABLE, STARTED, FINISHED }
+    public enum QuestStatus { NOT_AVAILABLE, AVAILABLE, STARTED, FINISHED } //ok
     public bool isFinished;
     public bool isActive;
     public QuestStatus progress; //estado da missão atual (enum)
 
-    [SerializeField]
-    public string finishMessage; //a mostrar quando a missão for completada, vinda de quem dar a missão
+    public string finishMessage; //a mostrar quando a missão for completada
     private bool allGoalsCleared;
 
     [SerializeField]
-    public GameObject nextQuest;
+    public GameObject nextQuest; //próxima quest, se houver alguma
 
     //métodos
     public void StartQuest()
     {
-    isActive = true;
+
     allGoalsCleared = false;
     progress = QuestStatus.STARTED;
-        Debug.Log("Quest " + id + ", named " +  title + " " + progress);
+
     }
 
     public void FinishQuest()
     {
+        progress = QuestStatus.FINISHED;
         isFinished = true;
         isActive = false;
-        progress = QuestStatus.FINISHED;
-        if (nextQuest != null) 
+
+
+        GameManager.Instance.FinishQuest();
+        Debug.Log("Quest " + id + ", named " + title + " " + progress);
+
+        if (nextQuest.GetComponent<Quest>() != null)
         {
             nextQuest.GetComponent<Quest>().progress = QuestStatus.AVAILABLE;
+            Debug.Log("Quest " + nextQuest.GetComponent<Quest>().id + " available");
         }
-        GameManager.Instance.FinishQuest();
-        QuestManager.instance.currentQuest.id = 0;
-        QuestManager.instance.currentQuest.description = string.Empty;
-        QuestManager.instance.currentQuest.progress = QuestStatus.NOT_AVAILABLE;
-        QuestManager.instance.currentQuest.isFinished = false;
-        QuestManager.instance.currentQuest.isActive = false;
-        Debug.Log("Quest " + id + ", named " + title + " " + progress);
     }
     public void CheckGoals()
     {
-        allGoalsCleared = true;
-
-            foreach (GameObject go in questGoals)
-            {
-                QuestGoalCheck goalStatus = go.GetComponent<QuestGoalCheck>();
+        foreach (GameObject go in questGoals)
+        {
+            QuestGoalCheck goalStatus = go.GetComponent<QuestGoalCheck>();
             if (goalStatus.isComplete == false)
             {
                 allGoalsCleared = false;
                 Debug.Log("QUEST " + id + " IN PROGRESS");
+                return;
             }
+
             else
                 allGoalsCleared = true;
-                    FinishQuest();
-                Debug.Log("QUEST " + id + " FINISHED");
-            }
-    }
-
-    private void Update()
-    {
-        if (progress == QuestStatus.STARTED)
+        }
+        if (allGoalsCleared)
         {
-            CheckGoals();
+            FinishQuest();
         }
     }
+
 }

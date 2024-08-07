@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public bool canPlayerMove { get; private set; }
     public bool isQuestRunning { get; private set; }
 
+    public Quest CurrentQuest;
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,10 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         hud = FindObjectOfType<HUDManager>();
+
+        List<Quest> gameQuests = new List<Quest>();
+
+  
     }
 
     // Start is called before the first frame update
@@ -44,10 +50,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (allQuestsFinished == false)
-        {
             CheckGameStatus();
-        }
     }
 
     public void LoadLevel(string sceneName)
@@ -98,20 +101,30 @@ public class GameManager : MonoBehaviour
     public void StartQuest()
     {
         isQuestRunning = true;
+        EndInteraction();
     }
 
     public void FinishQuest()
     {
         isQuestRunning = false;
+        CurrentQuest = null;
     }
 
     public void CheckGameStatus()
     {
-       allQuestsFinished = true;
-        foreach(Quest q in gameQuests)
+        allQuestsFinished = true;
+        foreach (Quest q in gameQuests)
         {
-        
-
+            if (q.progress != Quest.QuestStatus.FINISHED)
+            {
+                allQuestsFinished = false;
+                Debug.Log("There are quests to be finished");
+                return;
+            }
+            else
+            {
+                Debug.Log("All quests finished");
+            }
         }
     }
 }

@@ -145,14 +145,12 @@ public class PlayerInteraction : MonoBehaviour
     {
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * reach, Color.red);
-
+        int lm = collectiblesLayerMask | interactablesLayerMask | charactersLayerMask | enemiesLayerMask | dropPlaceLayerMask;
 
         //colide com qualquer coisa ao alcance do jogador?
-        if (!isHoldingObject && !isInConversation && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, collectiblesLayerMask)
-            || Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, interactablesLayerMask)
-            || Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, charactersLayerMask)
-            || Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, enemiesLayerMask)
-            || Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, dropPlaceLayerMask))
+        if (!isHoldingObject && !isInConversation && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, lm)
+            || isHoldingObject && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, dropPlaceLayerMask))
+
         {
             I_Interactor newInteractor = hit.collider.GetComponent<I_Interactor>();
             currentInteractableObject = hit.collider.GetComponent<InteractableObject>();
