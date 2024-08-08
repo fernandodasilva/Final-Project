@@ -54,7 +54,6 @@ public class PlayerInteraction : MonoBehaviour
 
 
     private RaycastHit hit;
-    //    private RaycastHit[] hits;
 
     private void Start()
     {
@@ -143,7 +142,6 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * reach, Color.red);
         int lm = collectiblesLayerMask | interactablesLayerMask | charactersLayerMask | enemiesLayerMask | dropPlaceLayerMask;
 
@@ -171,6 +169,12 @@ public class PlayerInteraction : MonoBehaviour
 
                 HUDManager.instance.questPanel.SetActive(false);
             }
+        }
+            else if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, groundLayerMask) ||
+                isHoldingObject && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, sceneryLayerMask))
+        {
+            DisableCurrentInteractable();
+            ResetInteraction();
         }
 
             else //nada no alcance?
