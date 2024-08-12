@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class QuestObject : InteractableObject
 { 
-
-
     public Quest objectQuest;
     public QuestButtonScript acceptButton;
 
@@ -83,10 +81,12 @@ public class QuestObject : InteractableObject
 
         if (objectQuest.progress == Quest.QuestStatus.STARTED)
         {
-            ResetInteraction();
             HUDManager.instance.questDescriptionText.text = string.Empty;
             sentences.Clear();
+            sentences.Add(objectQuest.description);
             sentences.Add(HUDManager.instance.startedQuestMessage);
+            ResetInteraction();
+
 
             GameManager.Instance.EnableMovement();
             HUDManager.instance.HideMouseCursor();
@@ -95,9 +95,11 @@ public class QuestObject : InteractableObject
         }
         if (objectQuest.progress == Quest.QuestStatus.NOT_AVAILABLE)
         {
-            ResetInteraction();
             HUDManager.instance.questDescriptionText.text = string.Empty;
+            sentences.Clear();
             sentences.Add(HUDManager.instance.questNotAvailableMessage);
+            ResetInteraction();
+
 
             GameManager.Instance.EnableMovement();
             HUDManager.instance.HideMouseCursor();
@@ -106,9 +108,9 @@ public class QuestObject : InteractableObject
         }
         if (objectQuest.progress == Quest.QuestStatus.FINISHED)
         {
-            ResetInteraction();
             HUDManager.instance.questDescriptionText.text = string.Empty;
             sentences.Add(objectQuest.finishMessage);
+            ResetInteraction();
 
             GameManager.Instance.EnableMovement();
             HUDManager.instance.HideMouseCursor();

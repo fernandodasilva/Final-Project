@@ -6341,9 +6341,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questTitle: {fileID: 0}
   questToAccept:
-    id: 0
     title: 
     description: 
+    nextQuestID: 0
     questGoals: []
     isFinished: 0
     isActive: 0
@@ -6575,6 +6575,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 476685103}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &118116907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6795315558985716918, guid: a48cf5282578f934794a384fb8363642,
+    type: 3}
+  m_PrefabInstance: {fileID: 476685103}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118116889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b66a93215d48c47a33a39a321f17ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &119324212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: 37bffd4f683b6cf4cbe9968b959b6deb,
@@ -18084,17 +18096,17 @@ PrefabInstance:
     - target: {fileID: 1513969659543569831, guid: 61f14ee53ab44d345ba4eb07202cb917,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.177
+      value: 5.85
       objectReference: {fileID: 0}
     - target: {fileID: 1513969659543569831, guid: 61f14ee53ab44d345ba4eb07202cb917,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3140001
+      value: 2.388
       objectReference: {fileID: 0}
     - target: {fileID: 1513969659543569831, guid: 61f14ee53ab44d345ba4eb07202cb917,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.029684
+      value: -20.601
       objectReference: {fileID: 0}
     - target: {fileID: 1513969659543569831, guid: 61f14ee53ab44d345ba4eb07202cb917,
         type: 3}
@@ -19064,7 +19076,7 @@ PrefabInstance:
         type: 3}
       propertyPath: objectQuest.nextQuest
       value: 
-      objectReference: {fileID: 118116889}
+      objectReference: {fileID: 118116907}
     - target: {fileID: 6795315558985716918, guid: a48cf5282578f934794a384fb8363642,
         type: 3}
       propertyPath: objectQuest.description
@@ -20453,6 +20465,94 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62df4129515df5b4da416fc5716496c9, type: 3}
+--- !u!1001 &851827410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.616514
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.016905904
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.059
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1756488650f32974c97533f81db27ca4,
+        type: 3}
+      propertyPath: m_Name
+      value: fireplace
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1756488650f32974c97533f81db27ca4, type: 3}
 --- !u!4 &852702550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 852919250526799064, guid: 1a63cca69c580fd47a926bf227c9aaea,
@@ -22448,6 +22548,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 761927425}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1022240220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6795315558985716918, guid: a48cf5282578f934794a384fb8363642,
+    type: 3}
+  m_PrefabInstance: {fileID: 761927425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022240202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b66a93215d48c47a33a39a321f17ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1024767734
 GameObject:
   m_ObjectHideFlags: 0
@@ -23875,9 +23987,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameQuests: []
   CurrentQuest:
-    id: 0
     title: 
     description: 
+    nextQuestID: 0
     questGoals: []
     isFinished: 0
     isActive: 0
@@ -31218,17 +31330,17 @@ PrefabInstance:
     - target: {fileID: 7678528781545754905, guid: f7d748f1a634c0c429b62880b3348197,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.683031
+      value: 5.29
       objectReference: {fileID: 0}
     - target: {fileID: 7678528781545754905, guid: f7d748f1a634c0c429b62880b3348197,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.317
+      value: 2.388
       objectReference: {fileID: 0}
     - target: {fileID: 7678528781545754905, guid: f7d748f1a634c0c429b62880b3348197,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.215002
+      value: -20.609
       objectReference: {fileID: 0}
     - target: {fileID: 7678528781545754905, guid: f7d748f1a634c0c429b62880b3348197,
         type: 3}
@@ -39685,7 +39797,7 @@ PrefabInstance:
         type: 3}
       propertyPath: objectQuest.nextQuest
       value: 
-      objectReference: {fileID: 1022240202}
+      objectReference: {fileID: 1022240220}
     - target: {fileID: 6795315558985716918, guid: a48cf5282578f934794a384fb8363642,
         type: 3}
       propertyPath: objectQuest.isFinished
@@ -39696,6 +39808,11 @@ PrefabInstance:
       propertyPath: objectQuest.description
       value: We need to sort those books in the desk. Also, there are some books
         requested by the students and we need to have them available right here.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795315558985716918, guid: a48cf5282578f934794a384fb8363642,
+        type: 3}
+      propertyPath: objectQuest.nextQuestID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6795315558985716918, guid: a48cf5282578f934794a384fb8363642,
         type: 3}
@@ -55410,3 +55527,4 @@ SceneRoots:
   - {fileID: 687314006}
   - {fileID: 543450651727376977}
   - {fileID: 448490540}
+  - {fileID: 851827410}

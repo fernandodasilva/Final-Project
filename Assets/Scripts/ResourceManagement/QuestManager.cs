@@ -7,11 +7,13 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
 
-    public List<GameObject> quests = new List<GameObject>(); //lista de missões default
+    public List<QuestObject> quests = new List<QuestObject>(); //lista de missões default
 
     public Quest currentQuest;
+    public Quest nextQuest;
 
     private bool allQuestsComplete;
+
 
     //a fazer: permitir que o jogador faça apenas uma quest por vez
 
@@ -31,11 +33,10 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-
-        quests[0].GetComponent<Quest>().progress = Quest.QuestStatus.AVAILABLE;
+        quests[0].objectQuest.progress = Quest.QuestStatus.AVAILABLE; o 
         for (int i = 1; i < quests.Count; i++)
         {
-            quests[i].GetComponent<Quest>().progress = Quest.QuestStatus.NOT_AVAILABLE;
+            quests[i].objectQuest.progress = Quest.QuestStatus.NOT_AVAILABLE;
         }
     }
 
@@ -57,7 +58,7 @@ public class QuestManager : MonoBehaviour
         currentQuest.progress = QuestStatus.STARTED;
         Debug.Log("Quest " + currentQuest.id + ", named " + currentQuest.title + " is " + currentQuest.progress);
         GameManager.Instance.EndInteraction();
-
+        nextQuest = currentQuest.nextQuest.objectQuest;
     }
 
     public void BeginQuest(Quest questToStart)
@@ -66,6 +67,25 @@ public class QuestManager : MonoBehaviour
         currentQuest.progress = QuestStatus.STARTED;
         currentQuest.isActive = true;
         Debug.Log("Quest " + currentQuest.id + ", named " + currentQuest.title + " " + currentQuest.progress);
+    }
+
+    public void FinishQuest()
+    {
+        currentQuest.progress = QuestStatus.FINISHED;
+        currentQuest.isActive = false;
+        currentQuest.isFinished = true;
+
+        int nextQuestID = currentQuest.id + 1;
+
+        quests[nextQuestID].GetComponent<Quest>().progress = QuestStatus.AVAILABLE;
+    }
+
+    public void UnlockQuest(Quest questToUnlock)
+    {
+        if (nextQuest != null)
+        {
+            questToUnlock.progress = QuestStatus.AVAILABLE;
+        }
     }
 
     public void RejectQuest()

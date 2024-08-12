@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+//using System.Linq;
 
 
 [System.Serializable] //ok é serializable mesmo
-public class Quest 
+public class Quest
 {
-    public int id;      //ID da missão em si - SERÁ NECESSÁRIO para pegar os dados da missão pelo ID
+    public int id { get; set; }      //ID da missão em si - SERÁ NECESSÁRIO para pegar os dados da missão pelo ID
     public string title; //nome da missão
     public string description; //descrição da missão
     public int nextQuestID;
@@ -22,7 +23,7 @@ public class Quest
     private bool allGoalsCleared;
 
     [SerializeField]
-    public GameObject nextQuest; //próxima quest, se houver alguma
+    public QuestObject nextQuest; //próxima quest, se houver alguma
 
     //métodos
     public void StartQuest()
@@ -45,8 +46,8 @@ public class Quest
 
         if (nextQuest.GetComponent<Quest>() != null)
         {
-            nextQuest.GetComponent<Quest>().progress = QuestStatus.AVAILABLE;
-            Debug.Log("Quest " + nextQuest.GetComponent<Quest>().id + " available");
+            QuestManager.instance.UnlockQuest(nextQuest.objectQuest);
+            Debug.Log("Quest " + nextQuest.objectQuest.id + " available");
         }
     }
     public void CheckGoals()

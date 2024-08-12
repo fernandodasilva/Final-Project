@@ -86,6 +86,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     public GameObject rejectButton;
 
+    private QuestObject currentQuestObject;
 
 
     public bool isPaperSheetOn { get; private set; }
