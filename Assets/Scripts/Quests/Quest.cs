@@ -7,7 +7,7 @@ using System.Collections.Generic;
 [System.Serializable] //ok é serializable mesmo
 public class Quest
 {
-    public int id { get; set; }      //ID da missão em si - SERÁ NECESSÁRIO para pegar os dados da missão pelo ID
+    public int id;      //ID da missão em si - SERÁ NECESSÁRIO para pegar os dados da missão pelo ID
     public string title; //nome da missão
     public string description; //descrição da missão
     public int nextQuestID;
@@ -44,7 +44,7 @@ public class Quest
         GameManager.Instance.FinishQuest();
         Debug.Log("Quest " + id + ", named " + title + " " + progress);
 
-        if (nextQuest.GetComponent<Quest>() != null)
+        if (nextQuest != null)
         {
             QuestManager.instance.UnlockQuest(nextQuest.objectQuest);
             Debug.Log("Quest " + nextQuest.objectQuest.id + " available");

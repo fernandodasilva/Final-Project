@@ -16,6 +16,9 @@ public class Computer : InteractableObject
     private GameObject resultsScreen;
     private string searchBoxInput;
 
+    public QuestGoalCheck questGoal { get; private set; }
+
+
     public override void Interact()
     {
         if (GameManager.Instance.isPowerOn && !isPowerOn)
@@ -36,6 +39,8 @@ public class Computer : InteractableObject
     {
         isPowerOn = false;
         isSystemOpen = false;
+        questGoal = GetComponent<QuestGoalCheck>();
+
     }
 
     // Update is called once per frame
@@ -44,6 +49,8 @@ public class Computer : InteractableObject
     {
         isPowerOn = true;
         Debug.Log("Computador ligado");
+        questGoal.CompleteGoal();
+
 
     }
 

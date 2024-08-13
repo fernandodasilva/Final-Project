@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
 
-    public List<QuestObject> quests = new List<QuestObject>(); //lista de missões default
+    public List<QuestObject> quests; //lista de missões default
 
     public Quest currentQuest;
     public Quest nextQuest;
@@ -33,7 +33,7 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        quests[0].objectQuest.progress = Quest.QuestStatus.AVAILABLE; o 
+        quests[0].objectQuest.progress = Quest.QuestStatus.AVAILABLE;
         for (int i = 1; i < quests.Count; i++)
         {
             quests[i].objectQuest.progress = Quest.QuestStatus.NOT_AVAILABLE;
