@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using System.Xml;
+using JetBrains.Annotations;
 
 public class HUDManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class HUDManager : MonoBehaviour
     public Canvas defaultCanvas;
     [SerializeField]
     public Canvas computerCanvas;
+    [SerializeField]
+    public Canvas pauseMenuCanvas;
 
     [SerializeField]
     private GameObject pickupUI;
@@ -221,17 +224,6 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    public void TogglePausePanel(bool value)
-    {
-        if (value == true)
-            pausePanel.SetActive(true);
-        else
-        {
-            pausePanel.SetActive(false);
-        }
-    }
-
-
     public void ShowQuestPanel()
     {
 
@@ -285,6 +277,23 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+
+    public void SwitchPauseMenuCanvas(bool value)
+    {
+        if (value == true)
+        {
+            defaultCanvas.gameObject.SetActive(false);
+            pauseMenuCanvas.gameObject.SetActive(true);
+            ShowMouseCursor();
+        }
+        else
+        {
+            defaultCanvas.gameObject.SetActive(true);
+            pauseMenuCanvas.gameObject.SetActive(false);
+            HideMouseCursor();
+        }
+    }
+
     public void CorrectDropPlace()
     {
         interactionOptionText.text = correctDropPlaceText;
@@ -294,4 +303,6 @@ public class HUDManager : MonoBehaviour
     {
         interactionOptionText.text = wrongDropPlaceText;
     }
+
+
 }

@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = true;
         Time.timeScale = 0;
-        HUDManager.instance.TogglePausePanel(true);
+        HUDManager.instance.SwitchPauseMenuCanvas(true);
        
     }
 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1.0f;
-        HUDManager.instance.TogglePausePanel(false);
+        HUDManager.instance.SwitchPauseMenuCanvas(false);
     }
 
     public void ActivatePower()

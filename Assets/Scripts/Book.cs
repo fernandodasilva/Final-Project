@@ -23,6 +23,8 @@ public class Book : I_Collector
     [SerializeField]
     public string bookText;
     [SerializeField]
+    public string bookSubject;
+    [SerializeField]
     public string bookAuthor;
     [SerializeField]
     public int id;
