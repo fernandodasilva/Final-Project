@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 public class HUDManager : MonoBehaviour
 {
     public static HUDManager instance;
-
+    private UIModeManager modeManager;
 
     [SerializeField]
     public Canvas defaultCanvas;
@@ -91,6 +91,20 @@ public class HUDManager : MonoBehaviour
 
     private QuestObject currentQuestObject;
 
+    [Header("Pause Menu")]
+    //canvases
+    [SerializeField]
+    public GameObject mainPauseMenu;
+    [SerializeField]
+    public GameObject inGameSettingsMenu;
+    [SerializeField]
+    public GameObject inGameQuitConfirmationMenu;
+
+
+
+
+    public enum DarkModeTextColor { White, Yellow };
+    public DarkModeTextColor darkTextColor {get; private set;}
 
     public bool isPaperSheetOn { get; private set; }
 
@@ -119,7 +133,7 @@ public class HUDManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         HideQuestPanel();
-
+        modeManager = GetComponent<UIModeManager>();
     }
 
 
@@ -134,6 +148,7 @@ public class HUDManager : MonoBehaviour
         questPanel.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        darkTextColor = DarkModeTextColor.White;
     }
 
     public void EnableInteractionBox(string text, string clickText)
@@ -304,5 +319,28 @@ public class HUDManager : MonoBehaviour
         interactionOptionText.text = wrongDropPlaceText;
     }
 
+    public void ToggleInterfaceMode()
+    {
+        modeManager.ResolveColorMode();
+    }
+
+    public DarkModeTextColor ChangeDarkModeTextColor(DarkModeTextColor color)
+    {
+        if(color == DarkModeTextColor.White)
+        {
+            color = DarkModeTextColor.Yellow;
+        }
+        else if (color == DarkModeTextColor.Yellow)
+        {
+            color = DarkModeTextColor.White;
+        }
+
+        return color;
+    }
+
+    public void ReturnToMainMenu()
+    {
+
+    }
 
 }
