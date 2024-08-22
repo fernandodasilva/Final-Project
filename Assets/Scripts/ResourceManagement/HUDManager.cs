@@ -9,15 +9,19 @@ using JetBrains.Annotations;
 
 public class HUDManager : MonoBehaviour
 {
+    #region Variáveis de managers
     public static HUDManager instance;
     private UIModeManager modeManager;
+    #endregion
 
+    #region Variáveis de Canvas
     [SerializeField]
     public Canvas defaultCanvas;
     [SerializeField]
     public Canvas computerCanvas;
     [SerializeField]
     public Canvas pauseMenuCanvas;
+    #endregion
 
     [SerializeField]
     private GameObject pickupUI;
@@ -26,25 +30,35 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     TMP_Text interactionText;
 
-    [SerializeField]
-    GameObject objectDescriptionBox;
-
+    #region folha do livro
+    [Header("Book cover representation")]
     [SerializeField]
     public GameObject paperSheet;
+    [SerializeField]
+    public Material defaultPaperSheetMaterial;
+    private Material currentPaperSheetMaterial;
+
 
     [SerializeField]
     public TMP_Text papersheetTitle;
     [SerializeField]
     public TMP_Text papersheetText;
 
+    #endregion
+
     [SerializeField]
     public TMP_Text interactionOptionText;
+    [SerializeField]
+    GameObject objectDescriptionBox;
 
     [SerializeField]
     public TMP_Text questTitleText;
     [SerializeField]
     public TMP_Text questDescriptionText;
+    [SerializeField]
+    public GameObject questPanel;
 
+    #region Variáveis de drop place
     [SerializeField]
     public string correctDropPlaceText;
     [SerializeField]
@@ -53,19 +67,14 @@ public class HUDManager : MonoBehaviour
     public string defaultDropPlaceText;
     [SerializeField]
     public string bookAlreadyInDropPlaceText;
+    #endregion
 
-    [SerializeField]
-    GameObject pausePanel;
-
-    [SerializeField]
-    public GameObject questPanel;
-
+    #region Cursores do mouse
     private GameObject currentCursor;
 
     [Header("Mouse Cursors")]
     [SerializeField]
     GameObject cursorPointer;
-
     [SerializeField]
     Texture2D defaultCursor;
     [SerializeField]
@@ -80,7 +89,7 @@ public class HUDManager : MonoBehaviour
     Texture2D collectibleCursor;
     [SerializeField]
     Texture2D dropPlaceCursor;
-
+    #endregion
 
     [Header("Quest Panel Buttons")]
     //botões
@@ -88,9 +97,9 @@ public class HUDManager : MonoBehaviour
     public GameObject acceptButton;
     [SerializeField]
     public GameObject rejectButton;
-
     private QuestObject currentQuestObject;
 
+    #region Menu de pausa
     [Header("Pause Menu")]
     //canvases
     [SerializeField]
@@ -99,26 +108,37 @@ public class HUDManager : MonoBehaviour
     public GameObject inGameSettingsMenu;
     [SerializeField]
     public GameObject inGameQuitConfirmationMenu;
+    [SerializeField]
+    public GameObject inGameHelpMenu;
+    [SerializeField]
+    public TMP_Text currentQuestTitle;
+    [SerializeField]
+    public TMP_Text currentQuestDescription;
+    #endregion
 
 
 
-
+    #region Variáveis do modo de UI (claro ou escuro)
     public enum DarkModeTextColor { White, Yellow };
     public DarkModeTextColor darkTextColor {get; private set;}
+    #endregion
 
     public bool isPaperSheetOn { get; private set; }
+
 
     public bool isQuestAvailable = false;
     public bool isQuestFinished = false;
     public bool isQuestRunning = false;
     private bool isQuestPanelActive = false;
 
+    #region Textos do Quest Panel
     [SerializeField]
     public string startedQuestMessage;
     [SerializeField]
     public string anotherQuestInProgressMessage;
     [SerializeField]
     public string questNotAvailableMessage;
+    #endregion
 
     private void Awake()
     {
@@ -149,8 +169,10 @@ public class HUDManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         darkTextColor = DarkModeTextColor.White;
+        currentPaperSheetMaterial = defaultPaperSheetMaterial;
     }
 
+    #region Funções para ativar ou desativar a caixa de interação
     public void EnableInteractionBox(string text, string clickText)
     {
         if (GetSheetStatus() == false)
@@ -161,6 +183,12 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    public void DisableInteractionBox()
+    {
+        objectDescriptionBox.SetActive(false);
+    }
+    #endregion
+
     private bool GetSheetStatus()
     {
         if (objectDescriptionBox.activeSelf == true)
@@ -170,17 +198,14 @@ public class HUDManager : MonoBehaviour
         else { return false; }
     }
 
-    public void DisableInteractionBox()
-    {
-        objectDescriptionBox.SetActive(false);
-    }
+
 
     public void ResetCursor()
     {
         currentCursor.GetComponent<RawImage>().texture = defaultCursor;
     }
 
-
+    #region Funções para alterar o ícone do cursor
     public void ChangeCursor_SELECTABLE()
     {
         currentCursor.GetComponent<RawImage>().texture = selectableCursor;
@@ -210,7 +235,7 @@ public class HUDManager : MonoBehaviour
     {
         currentCursor.GetComponent<RawImage>().texture = dropPlaceCursor;
     }
-
+    #endregion
 
     public void ToggleBookSheet(bool value)
     {
@@ -293,20 +318,18 @@ public class HUDManager : MonoBehaviour
     }
 
 
-    public void SwitchPauseMenuCanvas(bool value)
+    public void ShowPauseCanvas(bool value)
     {
+            defaultCanvas.gameObject.SetActive(!value);
+            pauseMenuCanvas.gameObject.SetActive(value);
+
         if (value == true)
         {
-            defaultCanvas.gameObject.SetActive(false);
-            pauseMenuCanvas.gameObject.SetActive(true);
             ShowMouseCursor();
         }
-        else
-        {
-            defaultCanvas.gameObject.SetActive(true);
-            pauseMenuCanvas.gameObject.SetActive(false);
+            else
             HideMouseCursor();
-        }
+ 
     }
 
     public void CorrectDropPlace()
@@ -341,6 +364,30 @@ public class HUDManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
 
+    }
+
+    public void OpenConfirmInGameReturnToMainMenuPanel()
+    {
+        inGameSettingsMenu.gameObject.SetActive(false);
+        inGameHelpMenu.gameObject.SetActive(false);
+        inGameQuitConfirmationMenu.gameObject.SetActive(true);
+    }
+
+    public void ReturnToDefaultMaterial()
+    {
+//        paperSheet = defaultPaperSheetMaterial;
+    }
+
+    public void UpdatePauseModeQuestInfo(string questTitle, string questDescription)
+    {
+        currentQuestTitle.text = questTitle;
+        currentQuestDescription.text = questDescription;
+    }
+
+    public void ResetPauseModeQuestInfo()
+    {
+        currentQuestTitle.text = "None";
+        currentQuestDescription.text = "No quest in progress";
     }
 
 }

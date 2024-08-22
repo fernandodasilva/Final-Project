@@ -59,25 +59,21 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Quest " + currentQuest.id + ", named " + currentQuest.title + " is " + currentQuest.progress);
         GameManager.Instance.EndInteraction();
         nextQuest = currentQuest.nextQuest.objectQuest;
+        HUDManager.instance.UpdatePauseModeQuestInfo(currentQuest.title, currentQuest.description);
     }
 
-    public void BeginQuest(Quest questToStart)
-    {
-        currentQuest = questToStart;
-        currentQuest.progress = QuestStatus.STARTED;
-        currentQuest.isActive = true;
-        Debug.Log("Quest " + currentQuest.id + ", named " + currentQuest.title + " " + currentQuest.progress);
-    }
+
 
     public void FinishQuest()
     {
         currentQuest.progress = QuestStatus.FINISHED;
         currentQuest.isActive = false;
         currentQuest.isFinished = true;
+        RemoveQuest(currentQuest.thisQuest);
 
         int nextQuestID = currentQuest.id + 1;
-
-        quests[nextQuestID].GetComponent<Quest>().progress = QuestStatus.AVAILABLE;
+        UnlockQuest(nextQuest);
+        currentQuest = null;
     }
 
     public void UnlockQuest(Quest questToUnlock)
@@ -88,10 +84,17 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+
+
     public void RejectQuest()
     {
         GameManager.Instance.EndInteraction();
         currentQuest = null;
+    }
+
+    public void RemoveQuest(QuestObject questToRemove)
+    {
+        quests.Remove(questToRemove);
     }
 
 }

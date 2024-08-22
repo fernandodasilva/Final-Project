@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEditor.TerrainTools;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +11,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; } = null;
     public bool IsPaused { get; private set; } = false;
     public bool isPowerOn { get; private set; }
-    private float oldTimeScale;
 
     [SerializeField]
-    private List<Quest> gameQuests = new List<Quest>();
+    private List<Quest> gameQuests;
     private bool allQuestsFinished;
 
     private HUDManager hud = null;
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public bool isQuestRunning { get; private set; }
 
     public Quest CurrentQuest;
+
+
 
     private void Awake()
     {
@@ -34,10 +36,6 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         hud = FindObjectOfType<HUDManager>();
-
-        List<Quest> gameQuests = new List<Quest>();
-
-  
     }
 
     // Start is called before the first frame update
@@ -45,6 +43,11 @@ public class GameManager : MonoBehaviour
     {
         isPowerOn = false;
         canPlayerMove = true;
+
+        foreach (QuestObject qObject in QuestManager.instance.quests) 
+        {
+            gameQuests.Add(qObject.objectQuest);
+        }
     }
 
     // Update is called once per frame
@@ -53,25 +56,47 @@ public class GameManager : MonoBehaviour
             CheckGameStatus();
     }
 
-    public void LoadLevel(string sceneName)
+    public void LoadLevel(int levelToLoad)
     {
-        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        MainMenuUIManager.instance.LoadLevel();
+        StartCoroutine(LoadLevelAsync(levelToLoad));
+    }
+
+    IEnumerator LoadLevelAsync(int sceneIndex)
+    {
+        AsyncOperation levelLoadOperation = SceneManager.LoadSceneAsync(sceneIndex);
+         while (!levelLoadOperation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(levelLoadOperation.progress / 0.9f);
+            MainMenuUIManager.instance.loadingSlider.value = progressValue;
+            yield return null;
+        }
+         if (sceneIndex != 0)
+        {
+            MainMenuUIManager.instance.HideLoadingScreen();
+        }
+         else
+        {
+            MainMenuUIManager.instance.ShowMainMenu();
+        }
     }
 
 
-    public void Pause()
+
+
+
+    public void PauseGame()
     {
-        IsPaused = true;
         Time.timeScale = 0;
-        HUDManager.instance.SwitchPauseMenuCanvas(true);
-       
+        IsPaused = true;
+        HUDManager.instance.ShowPauseCanvas(IsPaused);   
     }
 
-    public void Resume()
+    public void ResumeGame()
     {
-        IsPaused = false;
         Time.timeScale = 1.0f;
-        HUDManager.instance.SwitchPauseMenuCanvas(false);
+        IsPaused = false;
+        HUDManager.instance.ShowPauseCanvas(IsPaused);
     }
 
     public void ActivatePower()
@@ -108,6 +133,8 @@ public class GameManager : MonoBehaviour
     {
         isQuestRunning = false;
         CurrentQuest = null;
+        HUDManager.instance.ResetPauseModeQuestInfo();
+
     }
 
     public void CheckGameStatus()
@@ -126,5 +153,10 @@ public class GameManager : MonoBehaviour
                 Debug.Log("All quests finished");
             }
         }
+    }
+
+    public void QuitToSystem()
+    {
+        Application.Quit();
     }
 }

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8691729725306683080}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.206, y: 1, z: 0.41}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.25, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainScreen: {fileID: 0}
   resultsScreen: {fileID: 0}
+  books: []

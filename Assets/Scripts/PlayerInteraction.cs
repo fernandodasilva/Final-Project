@@ -35,6 +35,8 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField]
     private InputActionReference interactionAction, dropAction, useAction, toggleAction;
+    [SerializeField]
+    private InputActionReference pauseAction;
 
     [SerializeField]
     GameObject holdingPlace;
@@ -60,6 +62,8 @@ public class PlayerInteraction : MonoBehaviour
         interactionAction.action.performed += Interact;
         dropAction.action.performed += Drop;
         toggleAction.action.performed += Toggle;
+        pauseAction.action.performed += Pause;
+
         isHoldingObject = false;
         isInConversation = false;
     }
@@ -139,6 +143,20 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if(GameManager.Instance.IsPaused)
+        {
+            GameManager.Instance.ResumeGame();
+        }
+        else
+        {
+            GameManager.Instance.PauseGame();
+        }
+    }
+
+   
+
     // Update is called once per frame
     void Update()
     {
@@ -189,8 +207,6 @@ public class PlayerInteraction : MonoBehaviour
                 isInConversation = false;
             }
         }
-
-
     }
 
 

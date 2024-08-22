@@ -42,6 +42,11 @@ public class QuestObject : InteractableObject
 
     }
 
+    private void Awake()
+    {
+        objectQuest.thisQuest = this;
+    }
+
     public override void Interact()
     {
 
@@ -66,6 +71,7 @@ public class QuestObject : InteractableObject
             GameManager.Instance.DisableMovement();
             HUDManager.instance.acceptButton.SetActive(true);
             HUDManager.instance.rejectButton.SetActive(true);
+            //essa linha é a que faz o quest manager funcionar por enquanto, ver se é possível transferir essa responsabilidade para o quest manager
             QuestManager.instance.currentQuest = objectQuest;
             return;
 
@@ -86,6 +92,9 @@ public class QuestObject : InteractableObject
             sentences.Add(objectQuest.description);
             sentences.Add(HUDManager.instance.startedQuestMessage);
             ResetInteraction();
+
+
+
 
 
             GameManager.Instance.EnableMovement();

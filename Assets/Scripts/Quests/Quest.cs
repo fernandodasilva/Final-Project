@@ -24,6 +24,9 @@ public class Quest
 
     [SerializeField]
     public QuestObject nextQuest; //próxima quest, se houver alguma
+    public QuestObject thisQuest;
+
+    
 
     //métodos
     public void StartQuest()
@@ -31,6 +34,9 @@ public class Quest
 
     allGoalsCleared = false;
     progress = QuestStatus.STARTED;
+    QuestManager.instance.currentQuest = this;
+    QuestManager.instance.currentQuest.id = id;
+    HUDManager.instance.UpdatePauseModeQuestInfo(title, description);
 
     }
 
@@ -70,5 +76,4 @@ public class Quest
             FinishQuest();
         }
     }
-
 }

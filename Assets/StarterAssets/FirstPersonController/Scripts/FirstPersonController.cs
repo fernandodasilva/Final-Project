@@ -112,9 +112,14 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
+            if (GameManager.Instance.IsPaused == false)
+			{
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+
+            }
+
 		}
 
 		private void LateUpdate()
