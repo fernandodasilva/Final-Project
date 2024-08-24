@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; } = null;
     public bool IsPaused { get; private set; } = false;
+    public bool IsUsingComputer { get; private set; } = false;
     public bool isPowerOn { get; private set; }
 
     [SerializeField]
@@ -81,7 +82,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ToggleComputerUse(bool value)
+    {
+        if (value == true)
+        {
+            IsUsingComputer = true;
+        }
+        else
+        {
+            IsUsingComputer = false;
 
+        }
+    }
 
 
 
@@ -96,7 +108,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         IsPaused = false;
+        HUDManager.instance.ReturnToMainPauseMenu();
         HUDManager.instance.ShowPauseCanvas(IsPaused);
+        if (IsUsingComputer)
+        {
+            HUDManager.instance.ShowMouseCursor();
+        }
     }
 
     public void ActivatePower()

@@ -5,6 +5,7 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using UnityEngine.Events;
 using TMPro;
+using System.Xml.Serialization;
 
 
 
@@ -31,12 +32,15 @@ public class Book : I_Collector
     [SerializeField]
     public int tagNumber;
 
+
+
     [SerializeField]
     private DropPlace targetDropPlace;
 
     private I_Interactor interactorScript;
     private I_Collector collectionScript;
 
+    public Item bookInfo;
 
     private void Awake()
     {
@@ -44,6 +48,17 @@ public class Book : I_Collector
         interactorScript = GetComponent<I_Interactor>();
         collectionScript = GetComponent<I_Collector>();
         isInUse = collectionScript.isOnUse;
+    }
+
+    private void Start()
+    {
+        bookInfo = new Item();
+        bookInfo.Title = bookTitle;
+        bookInfo.Subject = bookSubject;
+        bookInfo.Author = bookAuthor;
+        bookInfo.SystemNumber = id;
+        bookInfo.CallNumber = tagNumber;
+
     }
 
     // Update is called once per frame
@@ -128,6 +143,7 @@ public class Book : I_Collector
             interactorScript.instructionMessage = interactorScript.defaultInstructionMessage;
         }
     }
+
 
 
 }

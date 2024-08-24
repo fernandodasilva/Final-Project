@@ -1,0 +1,7 @@
+{
+    "Title": "",
+    "Author": "",
+    "Subject": "",
+    "SystemNumber": 6,
+    "CallNumber": 0
+}

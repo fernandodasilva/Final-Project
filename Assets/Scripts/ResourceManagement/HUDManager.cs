@@ -140,6 +140,7 @@ public class HUDManager : MonoBehaviour
     public string questNotAvailableMessage;
     #endregion
 
+    #region Awake (singleton) / Start
     private void Awake()
     {
         if (instance == null)
@@ -171,6 +172,7 @@ public class HUDManager : MonoBehaviour
         darkTextColor = DarkModeTextColor.White;
         currentPaperSheetMaterial = defaultPaperSheetMaterial;
     }
+    #endregion
 
     #region Funções para ativar ou desativar a caixa de interação
     public void EnableInteractionBox(string text, string clickText)
@@ -196,13 +198,6 @@ public class HUDManager : MonoBehaviour
             return true;
         }
         else { return false; }
-    }
-
-
-
-    public void ResetCursor()
-    {
-        currentCursor.GetComponent<RawImage>().texture = defaultCursor;
     }
 
     #region Funções para alterar o ícone do cursor
@@ -235,6 +230,11 @@ public class HUDManager : MonoBehaviour
     {
         currentCursor.GetComponent<RawImage>().texture = dropPlaceCursor;
     }
+
+    public void ResetCursor()
+    {
+        currentCursor.GetComponent<RawImage>().texture = defaultCursor;
+    }
     #endregion
 
     public void ToggleBookSheet(bool value)
@@ -264,6 +264,7 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    #region Quest Panel
     public void ShowQuestPanel()
     {
 
@@ -288,7 +289,9 @@ public class HUDManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
     }
+    #endregion
 
+    #region Mostrar ou esconder o ponteiro do mouse
     public void ShowMouseCursor()
     {
         Cursor.visible = true;
@@ -300,7 +303,10 @@ public class HUDManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    #endregion
 
+
+    #region Mudar entre canvas
     public void SwitchCanvas(bool value)
     {
         if (value == true)
@@ -317,7 +323,6 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-
     public void ShowPauseCanvas(bool value)
     {
             defaultCanvas.gameObject.SetActive(!value);
@@ -331,6 +336,7 @@ public class HUDManager : MonoBehaviour
             HideMouseCursor();
  
     }
+    #endregion
 
     public void CorrectDropPlace()
     {
@@ -361,23 +367,46 @@ public class HUDManager : MonoBehaviour
         return color;
     }
 
-    public void ReturnToMainMenu()
+    #region Controle de paineis do menu de pausa
+    public void ReturnToMainPauseMenu()
     {
+        mainPauseMenu.gameObject.SetActive(true);
+        inGameSettingsMenu.gameObject.SetActive(false);
+        inGameHelpMenu.gameObject.SetActive(false);
+        inGameQuitConfirmationMenu.gameObject.SetActive(false);
+    }
+    
+    public void OpenInGameSettingsMenu()
+    {
+        mainPauseMenu.gameObject.SetActive(false);
+        inGameSettingsMenu.gameObject.SetActive(true);
+        inGameHelpMenu.gameObject.SetActive(false);
+        inGameQuitConfirmationMenu.gameObject.SetActive(false);
+    }
 
+    public void OpenInGameHelpMenu()
+    {
+        mainPauseMenu.gameObject.SetActive(false);
+        inGameSettingsMenu.gameObject.SetActive(false);
+        inGameHelpMenu.gameObject.SetActive(true);
+        inGameQuitConfirmationMenu.gameObject.SetActive(false);
     }
 
     public void OpenConfirmInGameReturnToMainMenuPanel()
     {
+        mainPauseMenu.gameObject.SetActive(false);
         inGameSettingsMenu.gameObject.SetActive(false);
         inGameHelpMenu.gameObject.SetActive(false);
         inGameQuitConfirmationMenu.gameObject.SetActive(true);
     }
+    #endregion
 
     public void ReturnToDefaultMaterial()
     {
 //        paperSheet = defaultPaperSheetMaterial;
     }
 
+    #region Informação da quest no menu de pause
     public void UpdatePauseModeQuestInfo(string questTitle, string questDescription)
     {
         currentQuestTitle.text = questTitle;
@@ -389,5 +418,5 @@ public class HUDManager : MonoBehaviour
         currentQuestTitle.text = "None";
         currentQuestDescription.text = "No quest in progress";
     }
-
+    #endregion
 }

@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http.Headers;
+using TMPro;
 using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.UI;
 
 public class Computer : InteractableObject
 {
@@ -15,15 +19,28 @@ public class Computer : InteractableObject
     private GameObject mainScreen;
     [SerializeField]
     private GameObject resultsScreen;
-    private string searchBoxInput;
 
-    private int inputData;
-
+    [SerializeField]
+    private TMP_Dropdown searchDropdown;
+    [SerializeField]
+    private TMP_InputField searchInputField;
+    
     public QuestGoalCheck questGoal { get; private set; }
 
     [SerializeField]
     public List<Book> books;
 
+    [Header("Controle da pesquisa")]
+    [SerializeField]
+    private int inputData;
+
+    [Header("Variáveis de teste")]
+    [SerializeField]
+    private string searchBoxInput;
+    [SerializeField]
+    private int searchBoxInput_asInt;
+    [SerializeField]
+    private float searchBoxInput_asFloat;
 
 
     public override void Interact()
@@ -36,10 +53,9 @@ public class Computer : InteractableObject
         {
             OpenSystem();
         }
-
-
-
     }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,20 +73,28 @@ public class Computer : InteractableObject
         isPowerOn = true;
         Debug.Log("Computador ligado");
         questGoal.CompleteGoal();
+    }
 
-
+    public void ReturnToSearchMenu()
+    {
+        mainScreen.gameObject.SetActive(true);
+        resultsScreen.gameObject.SetActive(false);
     }
 
     public void OpenSystem()
     {
-        Debug.Log("Opening PC system");
-        GameManager.Instance.DisableMovement();
-        isSystemOpen = true;
-        HUDManager.instance.defaultCanvas.gameObject.SetActive(false);
-        HUDManager.instance.computerCanvas.gameObject.SetActive(true);
-        HUDManager.instance.ShowMouseCursor();
-        mainScreen.gameObject.SetActive(true);
-        resultsScreen.gameObject.SetActive(false);
+        if (!isSystemOpen)
+        {
+            Debug.Log("Opening PC system");
+            GameManager.Instance.DisableMovement();
+            isSystemOpen = true;
+            HUDManager.instance.defaultCanvas.gameObject.SetActive(false);
+            HUDManager.instance.computerCanvas.gameObject.SetActive(true);
+            HUDManager.instance.ShowMouseCursor();
+            GameManager.Instance.ToggleComputerUse(true);
+            ReturnToSearchMenu();
+        }
+
     }
 
     public void CloseSystem()
@@ -80,6 +104,7 @@ public class Computer : InteractableObject
         HUDManager.instance.defaultCanvas.gameObject.SetActive(true);
         HUDManager.instance.computerCanvas.gameObject.SetActive(false);
         HUDManager.instance.HideMouseCursor();
+        GameManager.Instance.ToggleComputerUse(false);
         GameManager.Instance.EnableMovement();
     }
 
@@ -126,8 +151,21 @@ public class Computer : InteractableObject
 
     public void ReadStringInput(string s)
     {
+        if (s == string.Empty)
+            return;
+
         searchBoxInput = s;
-        Debug.Log(searchBoxInput);
+
+        searchBoxInput_asInt = int.Parse(searchBoxInput);
+        searchBoxInput_asFloat = float.Parse(searchBoxInput, CultureInfo.InvariantCulture);
+    }
+
+    public void ClearInput()
+    {
+        searchBoxInput = string.Empty;
+        searchBoxInput_asInt = 0;
+        searchBoxInput_asFloat= 0;
+        searchInputField.text = String.Empty;
     }
 
     public Book GetBookByTitle(string bookName)
@@ -162,56 +200,70 @@ public class Computer : InteractableObject
 
     public void StartSearch()
     {
-
-        switch (inputData)
+        if (searchBoxInput != null || searchBoxInput == "" || searchBoxInput == " ")
         {
-            case 0:
-                GetBookByTitle(searchBoxInput);
-                ShowSearchResults();
-                break;
-            case 1:
-                GetBookByAuthor(searchBoxInput);
-                ShowSearchResults();
-                break;
-            case 2:
-                GetBookBySubject(searchBoxInput);
-                ShowSearchResults();
-                break;
-            case 3:
-                int i ;
-                bool isInt = int.TryParse(searchBoxInput, out i);
- 
-                if (isInt)
-                {
-                    GetBookByID(i);
+            switch (inputData)
+            {
+                case 0:
+                    GetBookByTitle(searchBoxInput);
                     ShowSearchResults();
                     break;
-                }
-                else
-                {
-                    searchBoxInput = string.Empty;
-                    searchBoxInput = "Book ID must be a number";
-                    break;
-                }
-
-            case 4:
-                int j;
-                bool is_int = int.TryParse(searchBoxInput, out j);
-
-                if (is_int)
-                {
-                    GetBookByCallNumber(j);
+                case 1:
+                    GetBookByAuthor(searchBoxInput);
                     ShowSearchResults();
                     break;
-                }
-                else
-                {
-                    searchBoxInput = string.Empty;
-                    searchBoxInput = "Book Call Number must be a number";
+                case 2:
+                    GetBookBySubject(searchBoxInput);
+                    ShowSearchResults();
                     break;
-                }
+                case 3:
+                    int i;
+                    bool isInt = int.TryParse(searchBoxInput, out i);
+
+                    if (isInt)
+                    {
+                        GetBookByID(i);
+                        ShowSearchResults();
+                        break;
+                    }
+                    else
+                    {
+                        searchBoxInput = string.Empty;
+                        searchBoxInput = "Book ID must be a number";
+                        break;
+                    }
+
+                case 4:
+                    int j;
+                    bool is_int = int.TryParse(searchBoxInput, out j);
+
+                    if (is_int)
+                    {
+                        GetBookByCallNumber(j);
+                        ShowSearchResults();
+                        break;
+                    }
+                    else
+                    {
+                        searchBoxInput = string.Empty;
+                        searchBoxInput = "Book Call Number must be a number";
+                        break;
+                    }
+            }
+
 
         }
+        else
+        {
+            mainScreen.GetComponentInChildren<InputField>().placeholder.GetComponent<Text>().text = "No search terms";
+        }
+    }
+
+    public void GetSearchDropdownValue()
+    {
+        int pickedValue = searchDropdown.value;
+        string selectedOption = searchDropdown.options[pickedValue].text;
+        Debug.Log(selectedOption);
     }
 
 }
