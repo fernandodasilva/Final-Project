@@ -17,7 +17,7 @@ public class Item
     [SerializeField]
     public int CallNumber;
     [SerializeField]
-    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE }
+    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE, RESERVED }
 
 
     public static string directory = "Assets/JSONs/";

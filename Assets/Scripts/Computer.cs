@@ -22,7 +22,11 @@ public class Computer : InteractableObject
     private TMP_Dropdown searchDropdown;
     [SerializeField]
     private TMP_InputField searchInputField;
-    
+    [SerializeField]
+    private Button reserveBookButton;
+    [SerializeField]
+    private GameObject bookReserveConfirmationText;
+
     public QuestGoalCheck questGoal { get; private set; }
 
     [SerializeField]
@@ -272,4 +276,10 @@ public class Computer : InteractableObject
     {
     
     }
+
+    public void ReserveBook()
+    {
+
+    }
+
 }

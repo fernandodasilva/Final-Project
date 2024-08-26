@@ -31,7 +31,7 @@ public class Book : I_Collector
     [SerializeField]
     public int tagNumber;
     [SerializeField]
-    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE }
+    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE, RESERVED }
 
 
 
