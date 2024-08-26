@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEditor.TerrainTools;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
@@ -58,9 +57,18 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadLevel(int levelToLoad)
-    {
-        MainMenuUIManager.instance.LoadLevel();
+    {      
         StartCoroutine(LoadLevelAsync(levelToLoad));
+        MainMenuUIManager.instance.LoadLevel();
+
+        if (levelToLoad != 0)
+        {
+            MainMenuUIManager.instance.HideLoadingScreen();
+        }
+        else
+        {
+            MainMenuUIManager.instance.ShowMainMenu();
+        }
     }
 
     IEnumerator LoadLevelAsync(int sceneIndex)
@@ -72,15 +80,10 @@ public class GameManager : MonoBehaviour
             MainMenuUIManager.instance.loadingSlider.value = progressValue;
             yield return null;
         }
-         if (sceneIndex != 0)
-        {
-            MainMenuUIManager.instance.HideLoadingScreen();
-        }
-         else
-        {
-            MainMenuUIManager.instance.ShowMainMenu();
-        }
+
     }
+
+
 
     public void ToggleComputerUse(bool value)
     {
@@ -109,7 +112,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         IsPaused = false;
         HUDManager.instance.ReturnToMainPauseMenu();
-        HUDManager.instance.ShowPauseCanvas(IsPaused);
+        HUDManager.instance.ShowPauseCanvas(false);
         if (IsUsingComputer)
         {
             HUDManager.instance.ShowMouseCursor();

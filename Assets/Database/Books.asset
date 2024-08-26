@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158307962b4ce52429845d5c548b2b02, type: 3}
+  m_Name: Books
+  m_EditorClassIdentifier: 
+  usedNames: []
+  NormalContainerColor: {r: 1, g: 1, b: 1, a: 1}
+  SelectedContainerColor: {r: 0, g: 1, b: 0, a: 1}
+  NormalContainerFontColor: {r: 0, g: 0, b: 0, a: 1}
+  SelectedContainerFontColor: {r: 0, g: 0, b: 0, a: 1}
+  NormalEntryColor: {r: 1, g: 1, b: 1, a: 1}
+  SelectedEntryColor: {r: 0, g: 1, b: 0, a: 1}
+  NormalEntryFontColor: {r: 0, g: 0, b: 0, a: 1}
+  SelectedEntryFontColor: {r: 0, g: 0, b: 0, a: 1}
+  containerFontSize: 14
+  entryFontSize: 14
+  leftWindowWidth: 266
+  rightWindowWidth: 266
+  containerButtonWidth: 99
+  containerSpacing: 8
+  containerNormalFontStyle: 0
+  containerSelectedFontStyle: 0
+  entryNormalFontStyle: 0
+  entrySelectedFontStyle: 0
+  selectContainerWithParents: 0
+  hideSearchField: 0
+  showContainersAsColumn: 0
+  containerNameAlwaysFitsButton: 0
+  storage:
+  - containers: []

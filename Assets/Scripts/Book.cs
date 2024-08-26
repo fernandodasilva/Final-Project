@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using static UnityEditor.Progress;
 using UnityEngine.Events;
 using TMPro;
 using System.Xml.Serialization;
@@ -31,6 +30,8 @@ public class Book : I_Collector
     public int id;
     [SerializeField]
     public int tagNumber;
+    [SerializeField]
+    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE }
 
 
 
@@ -41,6 +42,8 @@ public class Book : I_Collector
     private I_Collector collectionScript;
 
     public Item bookInfo;
+
+//    public static string ItemDirectory = "Assets/Database/";
 
     private void Awake()
     {

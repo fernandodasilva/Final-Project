@@ -16,12 +16,15 @@ public class Item
     public int SystemNumber;
     [SerializeField]
     public int CallNumber;
+    [SerializeField]
+    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE }
+
 
     public static string directory = "Assets/JSONs/";
 
-    public static Item ReadItemJSON(string name)
+    public static Item ReadItemJSON(string fileName)
     {
-        string jsonString = File.ReadAllText(directory + name + ".json");
+        string jsonString = File.ReadAllText(directory + fileName + ".json");
         return JsonUtility.FromJson<Item>(jsonString);
     }
 

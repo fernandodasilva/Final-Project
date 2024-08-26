@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http.Headers;
 using TMPro;
-using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class Computer : InteractableObject
@@ -33,14 +31,15 @@ public class Computer : InteractableObject
     [Header("Controle da pesquisa")]
     [SerializeField]
     private int inputData;
+    [SerializeField]
+    private string selectedOption;
 
     [Header("Variáveis de teste")]
     [SerializeField]
     private string searchBoxInput;
     [SerializeField]
     private int searchBoxInput_asInt;
-    [SerializeField]
-    private float searchBoxInput_asFloat;
+
 
 
     public override void Interact()
@@ -157,14 +156,12 @@ public class Computer : InteractableObject
         searchBoxInput = s;
 
         searchBoxInput_asInt = int.Parse(searchBoxInput);
-        searchBoxInput_asFloat = float.Parse(searchBoxInput, CultureInfo.InvariantCulture);
     }
 
     public void ClearInput()
     {
         searchBoxInput = string.Empty;
         searchBoxInput_asInt = 0;
-        searchBoxInput_asFloat= 0;
         searchInputField.text = String.Empty;
     }
 
@@ -262,8 +259,17 @@ public class Computer : InteractableObject
     public void GetSearchDropdownValue()
     {
         int pickedValue = searchDropdown.value;
-        string selectedOption = searchDropdown.options[pickedValue].text;
-        Debug.Log(selectedOption);
+        selectedOption = searchDropdown.options[pickedValue].text;
     }
 
+
+    public void PreviousSearchResult()
+    {
+
+    }
+
+    public void NextSearchResult() 
+    {
+    
+    }
 }
