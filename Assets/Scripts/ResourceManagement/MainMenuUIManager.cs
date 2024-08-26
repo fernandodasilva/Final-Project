@@ -137,7 +137,10 @@ public class MainMenuUIManager : MonoBehaviour
             nextPageButton.interactable = true;
             for (int i = 1 + currentHelpPageIndex; i == helpPages.Length; i++)
             {
-                helpPages[i].SetActive(false);
+                if (i != currentHelpPageIndex)
+                {
+                    helpPages[i].SetActive(false);
+                }
             }
         }
         else
@@ -149,14 +152,18 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void NextPageHelpMenu()
     {
-        if (currentHelpPageIndex < helpPages.Length)
+        if (currentHelpPageIndex < helpPages.Length - 1)
         {
             previousPageButton.interactable = true;
             currentHelpPageIndex++;
             helpPages[currentHelpPageIndex].SetActive(true);
             for (int i = currentHelpPageIndex - 1; i == 0; i--)
             {
-                helpPages[i].SetActive(false);
+                if (i != currentHelpPageIndex)
+                {
+                    helpPages[i].SetActive(false);
+                }
+
             }
         }
         else
