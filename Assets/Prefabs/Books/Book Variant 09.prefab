@@ -33,6 +33,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.0475
       objectReference: {fileID: 0}
+    - target: {fileID: 629830861715023414, guid: 1406f6e6fb880cc40983abf252dedfdb,
+        type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1075058856795574878, guid: 1406f6e6fb880cc40983abf252dedfdb,
         type: 3}
       propertyPath: targetRotation.y
@@ -160,5 +165,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8765670601379532550, guid: 1406f6e6fb880cc40983abf252dedfdb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7873314920296489429}
   m_SourcePrefab: {fileID: 100100000, guid: 1406f6e6fb880cc40983abf252dedfdb, type: 3}
+--- !u!1 &3795104921872802849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8765670601379532550, guid: 1406f6e6fb880cc40983abf252dedfdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5552658143808285479}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7873314920296489429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795104921872802849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95168d18629ecbf448b858b863645297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  holdingPosition: {fileID: 0}
+  onCollect:
+    m_PersistentCalls:
+      m_Calls: []
+  onDrop:
+    m_PersistentCalls:
+      m_Calls: []
+  targetRotation: {x: 0, y: 0, z: 0}

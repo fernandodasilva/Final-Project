@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using System.Xml.Serialization;
+using static UnityEditor.Progress;
 
 
 
-public class Book : InteractableObject, I_Interactable
+public class Book : InteractableObject, I_Interactable, I_Collectible
 {
 
 
@@ -151,6 +152,12 @@ public class Book : InteractableObject, I_Interactable
     public void Collect()
     {
         collectionScript.Collect();
+        Debug.Log(this.name + " is on use: " + collectionScript.isOnUse);
+        transform.position = Vector3.zero;
+        transform.localEulerAngles = collectionScript.targetRotation;
+        collectionScript.onCollect.Invoke();
+
+
     }
 
     public void Drop()

@@ -74,8 +74,10 @@ public class QuestAuxObject : InteractableObject
 
     public override void ResetInteraction()
     {
-        index = 0;
+        base.ResetInteraction();
         startedDialog = false;
+        index = 0;
+
     }
 
     IEnumerator WriteLine()

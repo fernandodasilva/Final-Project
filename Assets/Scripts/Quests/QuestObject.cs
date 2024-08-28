@@ -130,6 +130,7 @@ public class QuestObject : InteractableObject
     public override void ResetInteraction()
     {
         index = 0;
+        base.ResetInteraction();
     }
 
 

@@ -43,14 +43,10 @@ public class Collector : MonoBehaviour, I_Collectible
     public void Collect()
     {
         isOnUse = true;
-        Debug.Log(this.name + " is on use: " + isOnUse);
-        transform.position = Vector3.zero;
-        transform.localEulerAngles = targetRotation;
-        onCollect.Invoke();
 
-            itemRB.isKinematic = true;
-            itemCollider.isTrigger = true;
-            itemOutline.enabled = false;
+        itemRB.isKinematic = true;
+        itemCollider.isTrigger = true;
+        itemOutline.enabled = false;
     }
 
     public void Drop()

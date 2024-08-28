@@ -152,7 +152,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8765670601379532550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567c6cfd2614ac64eaa146afeea74e27, type: 3}
+  m_Script: {fileID: 11500000, guid: 95168d18629ecbf448b858b863645297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   onDrop:
     m_PersistentCalls:
       m_Calls: []
-  targetRotation: {x: 0, y: 90, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0}
 --- !u!114 &7614269618757038068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,24 +194,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce7d13311388ff4f8f21b3963f961be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  holdingPosition: {fileID: 0}
-  onCollect:
-    m_PersistentCalls:
-      m_Calls: []
-  onDrop:
-    m_PersistentCalls:
-      m_Calls: []
-  targetRotation: {x: 0, y: 0, z: 0}
   isInCorrectDropPlace: 0
   isInUse: 0
   paperSheetActive: 0
   bookTitle: 
   bookText: 
+  bookSubject: 
   bookAuthor: 
   id: 0
   tagNumber: 0
   targetDropPlace: {fileID: 0}
+  bookInfo:
+    Title: 
+    Author: 
+    Subject: 
+    SystemNumber: 0
+    CallNumber: 0
 --- !u!54 &6196266288388615913
 Rigidbody:
   m_ObjectHideFlags: 0

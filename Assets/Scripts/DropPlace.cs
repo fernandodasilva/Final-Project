@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DropPlace : MonoBehaviour
+public class DropPlace : InteractableObject
 {
 
 
@@ -45,7 +45,6 @@ public class DropPlace : MonoBehaviour
         {
 
             isHovered = false;
-
         }
     }
 
@@ -59,6 +58,8 @@ public class DropPlace : MonoBehaviour
             return;
     }
 
-
-
+    public override void Interact()
+    {
+        interactionScript.Interact();
+    }
 }
