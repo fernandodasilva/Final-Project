@@ -17,14 +17,14 @@ public class DropPlace : MonoBehaviour
     public Vector3 itemPosition;
 
 
-    private I_Interactor interactionScript;
+    private Interactor interactionScript;
 
     public QuestGoalCheck questGoal {  get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        interactionScript = GetComponent<I_Interactor>();
+        interactionScript = GetComponent<Interactor>();
         questGoal = GetComponent<QuestGoalCheck>();
         isHovered = false;
     }

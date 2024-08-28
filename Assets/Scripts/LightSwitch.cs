@@ -6,7 +6,7 @@ public class LightSwitch : InteractableObject
 {
     // Start is called before the first frame update
 
-    private I_Interactor interactionScript;
+    private Interactor interactionScript;
 
 
     public bool isActive { get; private set; }

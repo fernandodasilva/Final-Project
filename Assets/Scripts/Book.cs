@@ -8,13 +8,14 @@ using System.Xml.Serialization;
 
 
 
-public class Book : I_Collector
+public class Book : InteractableObject, I_Interactable
 {
 
 
     private GameObject mainCamera;
     public bool isInCorrectDropPlace;
     public bool isInUse;
+
 
     public bool paperSheetActive = false;
 
@@ -34,23 +35,22 @@ public class Book : I_Collector
     public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE, RESERVED }
 
 
-
     [SerializeField]
     private DropPlace targetDropPlace;
 
-    private I_Interactor interactorScript;
-    private I_Collector collectionScript;
+    private Interactor interactorScript;
+    private Collector collectionScript;
 
     public Item bookInfo;
 
-//    public static string ItemDirectory = "Assets/Database/";
+    //    public static string ItemDirectory = "Assets/Database/";
 
     private void Awake()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        interactorScript = GetComponent<I_Interactor>();
-        collectionScript = GetComponent<I_Collector>();
-        isInUse = collectionScript.isOnUse;
+        interactorScript = GetComponent<Interactor>();
+        collectionScript = GetComponent<Collector>();
+
     }
 
     private void Start()
@@ -79,12 +79,6 @@ public class Book : I_Collector
     }
 
 
-    public void DeactivateInteraction() //a usar quando o livro for colocado no lugar certo
-    {
-       Deactivate();
-       interactorScript.GetComponent<Outline>().enabled = false;
-    
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -122,7 +116,7 @@ public class Book : I_Collector
                     dp.Evaluate();
                     //e se eu colocar uns lerps aqui?
                     this.transform.position = dp.transform.position;
-                    this.transform.eulerAngles = dp.transform.eulerAngles + targetRotation;
+                    this.transform.eulerAngles = dp.transform.eulerAngles + collectionScript.targetRotation;
 
 
 
@@ -149,4 +143,34 @@ public class Book : I_Collector
 
 
 
+    public override void Interact()
+    {
+        interactorScript.Interact();
+    }
+
+    public void Collect()
+    {
+        collectionScript.Collect();
+    }
+
+    public void Drop()
+    {
+        collectionScript.Drop();
+    }
+
+    public void Deactivate()
+    {
+        interactorScript.GetComponent<Outline>().enabled = false;
+    }
+
+    public void OnRaycastHit()
+    {
+        interactorScript.OnRaycastHit();
+    }
+
+    public void OnRaycastLeave()
+    {
+        interactorScript.OnRaycastLeave();
+        HUDManager.instance.ResetCursor();
+    }
 }

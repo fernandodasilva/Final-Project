@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestAuxObject : InteractableObject
 {
 
-    private I_Interactor interactionScript;
+    private Interactor interactionScript;
     // Start is called before the first frame update
 
     [SerializeField]

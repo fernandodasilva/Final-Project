@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface I_Collectible
 {
-    bool KeepPosition { get; }
-
-    GameObject Collect();
-
+    public void Collect();
+    public void Drop();
+    public void Deactivate();
 }

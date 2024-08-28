@@ -4,14 +4,16 @@ using UnityEngine;
 
 public abstract class InteractableObject : MonoBehaviour
 {
+
+
     // Start is called before the first frame update
-    public I_Interactor interactor { get; private set; }
+    public Interactor interactor { get; private set; }
 
     public abstract void Interact();
 
     public virtual void ResetInteraction()
     {
-
+        HUDManager.instance.ResetCursor();
     }
 
 }

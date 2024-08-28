@@ -49,7 +49,7 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField, Min(1.0f)]
     private float reach = 1.5f;
-    I_Interactor currentObject = null;
+    Interactor currentObject = null;
     InteractableObject currentInteractableObject = null;
 
 
@@ -85,7 +85,7 @@ public class PlayerInteraction : MonoBehaviour
         if (heldObject != null && !isHoldingObject)
         {
 
-            I_Collector collectionScript = heldObject.GetComponent<I_Collector>();
+            Collector collectionScript = heldObject.GetComponent<Collector>();
 
             collectionScript.Drop();
             if (heldObject.GetComponent<Book>().isInCorrectDropPlace == false)
@@ -114,7 +114,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
 
-        if (hit.collider.GetComponent<I_Collector>())
+        if (hit.collider.GetComponent<Collector>())
         {
             Debug.Log(hit.collider.name);
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
@@ -123,11 +123,11 @@ public class PlayerInteraction : MonoBehaviour
             isHoldingObject = true;
             if (heldObject.GetComponent<Book>().isInCorrectDropPlace == false)
             {
-                heldObject.GetComponent<I_Collector>().Collect();
+                heldObject.GetComponent<Collector>().Collect();
                 heldObject.transform.SetParent(holdingPlace.transform);
                 heldObject.transform.position = holdingPlace.transform.position;
 
-                heldObject.transform.localEulerAngles = holdingPlace.transform.localEulerAngles + heldObject.GetComponent<I_Collector>().targetRotation;
+                heldObject.transform.localEulerAngles = holdingPlace.transform.localEulerAngles + heldObject.GetComponent<Collector>().targetRotation;
                 EnableDropping();
 
                 if (rb != null)
@@ -166,7 +166,7 @@ public class PlayerInteraction : MonoBehaviour
             || isHoldingObject && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, reach, dropPlaceLayerMask))
 
         {
-            I_Interactor newInteractor = hit.collider.GetComponent<I_Interactor>();
+            Interactor newInteractor = hit.collider.GetComponent<Interactor>();
             currentInteractableObject = hit.collider.GetComponent<InteractableObject>();
             //Já existe algum item com o interactor ativo e não é o atual?
             if (HUDManager.instance.isPaperSheetOn == false && isInConversation == false && currentObject && newInteractor != currentObject)
@@ -209,7 +209,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
 
-    void SetNewCurrentInteractable(I_Interactor newInteractor)
+    void SetNewCurrentInteractable(Interactor newInteractor)
     {
         currentObject = newInteractor;
         if (newInteractor.enabled && newInteractor.shouldDisplayOutline == true)

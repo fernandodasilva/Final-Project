@@ -11,6 +11,7 @@ TagManager:
   - Interactable
   - Collectible
   - Drop_Place
+  - HoldingPosition
   layers:
   - Default
   - TransparentFX
