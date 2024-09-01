@@ -127,4 +127,46 @@ public class MainMenuUIManager : MonoBehaviour
         MainMenuUICanvas.gameObject.SetActive(true);
     }
 
+    #region HELP MENU
+
+    public void PreviousPageHelpMenu()
+    {
+        if (currentHelpPageIndex > 0)
+        {
+            currentHelpPageIndex--;
+            nextPageButton.interactable = true;
+            for (int i = 1 + currentHelpPageIndex; i == helpPages.Length; i++)
+            {
+                helpPages[i].SetActive(false);
+            }
+        }
+        else
+            currentHelpPageIndex = 0;
+            helpPages[0].SetActive(true);
+            previousPageButton.interactable = false;
+          
+    }
+
+    public void NextPageHelpMenu()
+    {
+        if (currentHelpPageIndex < helpPages.Length)
+        {
+            previousPageButton.interactable = true;
+            currentHelpPageIndex++;
+            helpPages[currentHelpPageIndex].SetActive(true);
+            for (int i = currentHelpPageIndex - 1; i == 0; i--)
+            {
+                helpPages[i].SetActive(false);
+            }
+        }
+        else
+            currentHelpPageIndex = helpPages.Length;
+            helpPages[helpPages.Length].SetActive(true);
+            nextPageButton.interactable = false;
+    }
+
+    #endregion
+
+
+
 }

@@ -23,9 +23,9 @@ MonoBehaviour:
   SelectedEntryFontColor: {r: 0, g: 0, b: 0, a: 1}
   containerFontSize: 14
   entryFontSize: 14
-  leftWindowWidth: 266
-  rightWindowWidth: 266
-  containerButtonWidth: 99
+  leftWindowWidth: 555
+  rightWindowWidth: 333
+  containerButtonWidth: 111
   containerSpacing: 8
   containerNormalFontStyle: 0
   containerSelectedFontStyle: 0
@@ -35,5 +35,4 @@ MonoBehaviour:
   hideSearchField: 0
   showContainersAsColumn: 0
   containerNameAlwaysFitsButton: 0
-  storage:
-  - containers: []
+  storage: []

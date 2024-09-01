@@ -1,49 +1,47 @@
-using System.IO;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-
-[System.Serializable]
-public class Item
+namespace Database
 {
-    [SerializeField]
-    public string Title;
-    [SerializeField]
-    public string Author;
-    [SerializeField]
-    public string Subject;
-    [SerializeField]
-    public int SystemNumber;
-    [SerializeField]
-    public int CallNumber;
-    [SerializeField]
-    public enum status { AVAILABLE, LIMITED, RESTRICTED, NOT_AVAILABLE, RESERVED }
 
-
-    public static string directory = "Assets/JSONs/";
-
-    public static Item ReadItemJSON(string fileName)
+    public class Item
     {
-        string jsonString = File.ReadAllText(directory + fileName + ".json");
-        return JsonUtility.FromJson<Item>(jsonString);
-    }
+        public int _SystemNumber;
+        public int _CallNumber;
+        public string _Title;
+        public string _Author;
+        public string _Subject;
 
-    public static void WriteItemJSON(Item item)
-    {
-        string jsonString = JsonUtility.ToJson(item);
-        string filePath = directory + item.Title + ".json";
-        File.WriteAllText(filePath, jsonString);
-    }
+        public string _Status;
 
-    public void Load()
-    {
-        var content = File.ReadAllText(directory);
-        var book = JsonUtility.FromJson<Item>(content);
 
-        Title = book.Title;
-        Author = book.Author;
-        Subject = book.Subject;
-        SystemNumber = book.SystemNumber;
-        CallNumber = book.CallNumber;
+
+
+        public Item(int systemNumber, int callNumber, string title, string author, string subject)
+        {
+            _SystemNumber = systemNumber;
+            _CallNumber = callNumber;
+            _Title = title;
+            _Author = author;
+            _Subject = subject;
+        }
+
+        public Item(int systemNumber, int callNumber, string title, string author, string subject, string status)
+        {
+            _SystemNumber = systemNumber;
+            _CallNumber = callNumber;
+            _Title = title;
+            _Author = author;
+            _Subject = subject;
+            _Status = status;
+        }
+
+        public static Item GetTestItem()
+        {
+            return new Item(0, 0, "Test Book", "Test Author", "Test Subject");
+        }
     }
 }

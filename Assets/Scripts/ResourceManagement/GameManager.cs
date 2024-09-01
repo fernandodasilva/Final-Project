@@ -179,4 +179,14 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    #region Screen settings
+
+    public void SetFullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+    }
+
+    #endregion
+
 }

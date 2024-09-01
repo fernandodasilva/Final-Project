@@ -1,0 +1,220 @@
+[
+  {
+    "MountId": "56e62dd7-241f-41e9-8c6b-dd4ca4513e62",
+    "AncestorCsetIds": [
+      101
+    ],
+    "SourceCsetId": 115,
+    "DestinationCsetId": 101,
+    "FileConflicts": [
+      {
+        "Path": "/Assets/Scenes/Library.unity",
+        "ItemId": 6074,
+        "ParentItemId": 186,
+        "BaseRevId": 8704,
+        "SourceRevId": 9199,
+        "DestinationRevId": 8704
+      },
+      {
+        "Path": "/Assets/Scenes/MainMenu.unity",
+        "ItemId": 196,
+        "ParentItemId": 186,
+        "BaseRevId": 8705,
+        "SourceRevId": 8864,
+        "DestinationRevId": 8705
+      },
+      {
+        "Path": "/Assets/Scripts/OutlineHighlight.cs",
+        "ItemId": 1531,
+        "ParentItemId": 1507,
+        "BaseRevId": 2587,
+        "SourceRevId": 8878,
+        "DestinationRevId": 2587
+      },
+      {
+        "Path": "/Assets/Scripts/Waypoint.cs",
+        "ItemId": 3059,
+        "ParentItemId": 1507,
+        "BaseRevId": 3031,
+        "SourceRevId": 8894,
+        "DestinationRevId": 3031
+      },
+      {
+        "Path": "/Assets/Scripts/Collectible.cs",
+        "ItemId": 3054,
+        "ParentItemId": 1507,
+        "BaseRevId": 3296,
+        "SourceRevId": 8866,
+        "DestinationRevId": 3296
+      },
+      {
+        "Path": "/Assets/Scripts/PlayerController.cs",
+        "ItemId": 3339,
+        "ParentItemId": 1507,
+        "BaseRevId": 3328,
+        "SourceRevId": 8879,
+        "DestinationRevId": 3328
+      },
+      {
+        "Path": "/Assets/Scripts/NonPlayableCharacter.cs",
+        "ItemId": 3514,
+        "ParentItemId": 1507,
+        "BaseRevId": 7440,
+        "SourceRevId": 8877,
+        "DestinationRevId": 7440
+      },
+      {
+        "Path": "/Assets/Scripts/DropPlace.cs",
+        "ItemId": 3056,
+        "ParentItemId": 1507,
+        "BaseRevId": 5582,
+        "SourceRevId": 8982,
+        "DestinationRevId": 5582
+      },
+      {
+        "Path": "/Assets/Scripts/Interfaces/I_Collectible.cs",
+        "ItemId": 3065,
+        "ParentItemId": 2622,
+        "BaseRevId": 3026,
+        "SourceRevId": 8984,
+        "DestinationRevId": 3026
+      },
+      {
+        "Path": "/Assets/Scripts/Interfaces/Interactor.cs",
+        "ItemId": 1529,
+        "ParentItemId": 2622,
+        "BaseRevId": 5699,
+        "SourceRevId": 8985,
+        "DestinationRevId": 5699
+      },
+      {
+        "Path": "/Assets/Scripts/InteractableObject.cs",
+        "ItemId": 5711,
+        "ParentItemId": 1507,
+        "BaseRevId": 6108,
+        "SourceRevId": 8983,
+        "DestinationRevId": 6108
+      },
+      {
+        "Path": "/Assets/Scripts/Book.cs",
+        "ItemId": 1644,
+        "ParentItemId": 1507,
+        "BaseRevId": 8142,
+        "SourceRevId": 9022,
+        "DestinationRevId": 8142
+      },
+      {
+        "Path": "/Assets/Scripts/LightSwitch.cs",
+        "ItemId": 5714,
+        "ParentItemId": 1507,
+        "BaseRevId": 7668,
+        "SourceRevId": 8986,
+        "DestinationRevId": 7668
+      },
+      {
+        "Path": "/Assets/Scripts/Computer.cs",
+        "ItemId": 3518,
+        "ParentItemId": 1507,
+        "BaseRevId": 8143,
+        "SourceRevId": 8867,
+        "DestinationRevId": 8143
+      },
+      {
+        "Path": "/Assets/Scripts/UIModeElement.cs",
+        "ItemId": 7843,
+        "ParentItemId": 1507,
+        "BaseRevId": 7834,
+        "SourceRevId": 8892,
+        "DestinationRevId": 7834
+      },
+      {
+        "Path": "/Assets/Scripts/UIPreferences.cs",
+        "ItemId": 7845,
+        "ParentItemId": 1507,
+        "BaseRevId": 7836,
+        "SourceRevId": 8893,
+        "DestinationRevId": 7836
+      },
+      {
+        "Path": "/Assets/Scripts/PlayerInteraction.cs",
+        "ItemId": 2579,
+        "ParentItemId": 1507,
+        "BaseRevId": 8145,
+        "SourceRevId": 8987,
+        "DestinationRevId": 8145
+      },
+      {
+        "Path": "/Assets/Scripts/Quests/QuestAuxObject.cs",
+        "ItemId": 5466,
+        "ParentItemId": 3780,
+        "BaseRevId": 7626,
+        "SourceRevId": 8988,
+        "DestinationRevId": 7626
+      },
+      {
+        "Path": "/Assets/Scripts/Quests/QuestGoalCheck.cs",
+        "ItemId": 3778,
+        "ParentItemId": 3780,
+        "BaseRevId": 7646,
+        "SourceRevId": 8884,
+        "DestinationRevId": 7646
+      },
+      {
+        "Path": "/Assets/Scripts/Quests/QuestButtonScript.cs",
+        "ItemId": 4264,
+        "ParentItemId": 3780,
+        "BaseRevId": 7657,
+        "SourceRevId": 8883,
+        "DestinationRevId": 7657
+      },
+      {
+        "Path": "/Assets/Scripts/Quests/Quest.cs",
+        "ItemId": 3785,
+        "ParentItemId": 3780,
+        "BaseRevId": 7960,
+        "SourceRevId": 8881,
+        "DestinationRevId": 7960
+      },
+      {
+        "Path": "/Assets/Scripts/Quests/QuestObject.cs",
+        "ItemId": 3787,
+        "ParentItemId": 3780,
+        "BaseRevId": 7961,
+        "SourceRevId": 8989,
+        "DestinationRevId": 7961
+      },
+      {
+        "Path": "/Assets/Scripts/ResourceManagement/PauseManager.cs",
+        "ItemId": 3314,
+        "ParentItemId": 3217,
+        "BaseRevId": 3302,
+        "SourceRevId": 8889,
+        "DestinationRevId": 3302
+      },
+      {
+        "Path": "/Assets/Scripts/ResourceManagement/UIModeManager.cs",
+        "ItemId": 7847,
+        "ParentItemId": 3217,
+        "BaseRevId": 7832,
+        "SourceRevId": 8891,
+        "DestinationRevId": 7832
+      },
+      {
+        "Path": "/Assets/Scripts/ResourceManagement/QuestManager.cs",
+        "ItemId": 3789,
+        "ParentItemId": 3217,
+        "BaseRevId": 7965,
+        "SourceRevId": 8890,
+        "DestinationRevId": 7965
+      },
+      {
+        "Path": "/Assets/Scripts/ResourceManagement/HUDManager.cs",
+        "ItemId": 3220,
+        "ParentItemId": 3217,
+        "BaseRevId": 7974,
+        "SourceRevId": 8887,
+        "DestinationRevId": 7974
+      }
+    ]
+  }
+]
